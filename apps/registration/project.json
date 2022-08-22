@@ -1,16 +1,16 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/auth-system/src",
+  "sourceRoot": "apps/registration/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/auth-system",
-        "main": "apps/auth-system/src/main.ts",
-        "tsConfig": "apps/auth-system/tsconfig.app.json",
-        "assets": ["apps/auth-system/src/assets"]
+        "outputPath": "dist/apps/registration",
+        "main": "apps/registration/src/main.ts",
+        "tsConfig": "apps/registration/tsconfig.app.json",
+        "assets": ["apps/registration/src/assets"]
       },
       "configurations": {
         "production": {
@@ -19,8 +19,8 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/auth-system/src/environments/environment.ts",
-              "with": "apps/auth-system/src/environments/environment.prod.ts"
+              "replace": "apps/registration/src/environments/environment.ts",
+              "with": "apps/registration/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -29,11 +29,11 @@
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "auth-system:build"
+        "buildTarget": "registration:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "auth-system:build:production"
+          "buildTarget": "registration:build:production"
         }
       }
     },
@@ -41,14 +41,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/auth-system/**/*.ts"]
+        "lintFilePatterns": ["apps/registration/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/auth-system"],
+      "outputs": ["coverage/apps/registration"],
       "options": {
-        "jestConfig": "apps/auth-system/jest.config.ts",
+        "jestConfig": "apps/registration/jest.config.ts",
         "passWithNoTests": true
       }
     }

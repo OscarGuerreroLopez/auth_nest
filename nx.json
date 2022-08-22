@@ -24,5 +24,5 @@
       "dependsOn": ["^build"]
     }
   },
-  "defaultProject": "auth-system"
+  "defaultProject": "registration"
 }

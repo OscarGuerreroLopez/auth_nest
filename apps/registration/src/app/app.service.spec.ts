@@ -14,8 +14,10 @@ describe('AppService', () => {
   });
 
   describe('getData', () => {
-    it('should return "Welcome to auth-system!"', () => {
-      expect(service.getData()).toEqual({ message: 'Welcome to auth-system!' });
+    it('should return "Welcome to registration!"', () => {
+      expect(service.getData()).toEqual({
+        message: 'Welcome to registration!',
+      });
     });
   });
 });
