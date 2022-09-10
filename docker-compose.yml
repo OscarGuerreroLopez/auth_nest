@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  login:
+    image: login
+    environment:
+      - apiPath=http://api:3334
+    ports:
+      - '3334:3334'
+  registration:
+    image: registration
+    environment:
+    - apiPath=http://api:3333
+    ports:
+      - '3333:3333'

@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "auth-nest",
+  "npmScope": "auth",
   "affected": {
     "defaultBase": "main"
   },

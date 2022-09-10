@@ -1,16 +1,16 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/registration/src",
+  "sourceRoot": "apps/login/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/registration",
-        "main": "apps/registration/src/main.ts",
-        "tsConfig": "apps/registration/tsconfig.app.json",
-        "assets": ["apps/registration/src/assets"],
+        "outputPath": "dist/apps/login",
+        "main": "apps/login/src/main.ts",
+        "tsConfig": "apps/login/tsconfig.app.json",
+        "assets": ["apps/login/src/assets"],
         "generatePackageJson": true
       },
       "configurations": {
@@ -20,8 +20,8 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/registration/src/environments/environment.ts",
-              "with": "apps/registration/src/environments/environment.prod.ts"
+              "replace": "apps/login/src/environments/environment.ts",
+              "with": "apps/login/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -30,11 +30,11 @@
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "registration:build"
+        "buildTarget": "login:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "registration:build:production"
+          "buildTarget": "login:build:production"
         }
       }
     },
@@ -42,14 +42,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/registration/**/*.ts"]
+        "lintFilePatterns": ["apps/login/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/registration"],
+      "outputs": ["coverage/apps/login"],
       "options": {
-        "jestConfig": "apps/registration/jest.config.ts",
+        "jestConfig": "apps/login/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -57,8 +57,8 @@
       "builder": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          "nx build registration",
-          "docker build -f ./apps/registration/Dockerfile . -t registration"
+          "nx build login",
+          "docker build -f ./apps/login/Dockerfile . -t login"
         ],
         "parallel": false
       }

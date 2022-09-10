@@ -2,6 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "registration": "apps/registration"
+    "login": "apps/login",
+    "middleware": "libs/middleware",
+    "registration": "apps/registration",
+    "utils": "libs/utils"
   }
 }
