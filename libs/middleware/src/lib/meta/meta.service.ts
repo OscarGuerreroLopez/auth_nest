@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { MetaObject } from '@auth/types';
 
 @Injectable()
 export class MetaService {
-  getMetaInfo(dbName: string, env: string): MetaObject {
+  getMetaInfo(dbName: string, env: string) {
     const info = {
       DbName: dbName,
       NodeEnv: env,

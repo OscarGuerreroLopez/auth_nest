@@ -16,7 +16,6 @@
     "baseUrl": ".",
     "paths": {
       "@auth/middleware": ["libs/middleware/src/index.ts"],
-      "@auth/types": ["libs/types/src/index.ts"],
       "@auth/utils": ["libs/utils/src/index.ts"]
     }
   },

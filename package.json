@@ -6,6 +6,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "test:registration": "nx run registration:test",
+    "test:login": "nx run login:test",
     "build:all": "nx run-many --target=build --projects=login,registration --parallel",
     "serve:all": "nx run-many --target=serve --projects=login,registration --parallel",
     "deploy:registration": "nx deploy registration",

@@ -5,7 +5,6 @@
     "login": "apps/login",
     "middleware": "libs/middleware",
     "registration": "apps/registration",
-    "types": "libs/types",
     "utils": "libs/utils"
   }
 }
