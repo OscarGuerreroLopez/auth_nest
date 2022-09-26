@@ -4,12 +4,14 @@ import { Repository } from 'typeorm';
 import { UserM, UserRepository } from '@auth/domain';
 
 import { User } from '../entities/user.entity';
+import { ExceptionsService } from '../exceptions';
 
 @Injectable()
 export class DatabaseUserRepository implements UserRepository {
   constructor(
     @InjectRepository(User)
-    private readonly userEntityRepository: Repository<User>
+    private readonly userEntityRepository: Repository<User>,
+    private readonly exceptionService: ExceptionsService
   ) {}
   async updateRefreshToken(
     username: string,
@@ -22,16 +24,19 @@ export class DatabaseUserRepository implements UserRepository {
       { hach_refresh_token: refreshToken }
     );
   }
-  async getUserByUsername(username: string): Promise<UserM | null> {
+  async getUserByUsername(username: string): Promise<UserM | void> {
     const adminUserEntity = await this.userEntityRepository.findOne({
       where: {
         username: username,
       },
     });
     if (!adminUserEntity) {
-      return null;
+      return this.exceptionService.userNotFound({
+        message: `user ${username} not found`,
+      });
+    } else {
+      return this.toUser(adminUserEntity);
     }
-    return this.toUser(adminUserEntity);
   }
   async updateLastLogin(username: string): Promise<void> {
     await this.userEntityRepository.update(

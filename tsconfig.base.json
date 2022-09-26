@@ -18,6 +18,7 @@
       "@auth/domain": ["libs/domain/src/index.ts"],
       "@auth/infrastructure": ["libs/infrastructure/src/index.ts"],
       "@auth/middleware": ["libs/middleware/src/index.ts"],
+      "@auth/usecases": ["libs/usecases/src/index.ts"],
       "@auth/utils": ["libs/utils/src/index.ts"]
     }
   },
