@@ -4,11 +4,35 @@ services:
     image: login
     environment:
       - apiPath=http://api:3334
+      - DATABASE_HOST
+      - DATABASE_PORT
+      - DATABASE_USER
+      - DATABASE_PASSWORD
+      - DATABASE_NAME
+      - DATABASE_SCHEMA
+      - DATABASE_SYNCHRONIZE
+      - JWT_SECRET
+      - JWT_EXPIRATION_TIME
+      - JWT_REFRESH_TOKEN_SECRET
+      - JWT_REFRESH_TOKEN_EXPIRATION_TIME
+      - NODE_ENV
     ports:
       - '3334:3334'
   registration:
     image: registration
     environment:
     - apiPath=http://api:3333
+    - DATABASE_HOST
+    - DATABASE_PORT
+    - DATABASE_USER
+    - DATABASE_PASSWORD
+    - DATABASE_NAME
+    - DATABASE_SCHEMA
+    - DATABASE_SYNCHRONIZE
+    - JWT_SECRET
+    - JWT_EXPIRATION_TIME
+    - JWT_REFRESH_TOKEN_SECRET
+    - JWT_REFRESH_TOKEN_EXPIRATION_TIME
+    - NODE_ENV
     ports:
       - '3333:3333'
