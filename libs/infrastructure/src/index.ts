@@ -4,3 +4,8 @@ export * from './lib/exceptions';
 export * from './lib/common/filter/exception.filter';
 export * from './lib/common/interceptors';
 export * from './lib/config/environment-config';
+export * from './lib/usecases-proxy/usecases-proxy.module';
+export * from './lib/services';
+export * from './lib/repositories';
+export * from './lib/config/typeorm';
+export * from './lib/entities';

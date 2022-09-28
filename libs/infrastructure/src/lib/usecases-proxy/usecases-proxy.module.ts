@@ -13,7 +13,7 @@ import { LoggerService } from '../logger/logger.service';
 import { BcryptModule } from '../services/bcrypt/bcrypt.module';
 import { BcryptService } from '../services/bcrypt/bcrypt.service';
 import { JwtModule } from '../services/jwt/jwt.module';
-import { JwtService } from '../services/jwt/jwt.service';
+import { JwtTokenService } from '../services/jwt/jwt.service';
 import { RepositoriesModule } from '../repositories/repositories.module';
 
 import { DatabaseUserRepository } from '../repositories/user.repository';
@@ -45,7 +45,7 @@ export class UsecasesProxyModule {
         {
           inject: [
             LoggerService,
-            JwtService,
+            JwtTokenService,
             EnvironmentConfigService,
             DatabaseUserRepository,
             BcryptService,
@@ -53,7 +53,7 @@ export class UsecasesProxyModule {
           provide: UsecasesProxyModule.LOGIN_USECASES_PROXY,
           useFactory: (
             logger: LoggerService,
-            jwtService: JwtService,
+            jwtService: JwtTokenService,
             config: EnvironmentConfigService,
             userRepo: DatabaseUserRepository,
             bcryptService: BcryptService
