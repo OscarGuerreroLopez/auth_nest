@@ -16,7 +16,7 @@ const config = new DataSource({
   entities: [__dirname + './../../**/*.entity{.ts,.js}'],
   migrationsRun: true,
   migrationsTableName: 'migration_user',
-  migrations: ['database/migrations/**/*{.ts,.js}'],
+  migrations: ['db/migrations/**/*{.ts,.js}'],
 });
 // console.log(config);
 

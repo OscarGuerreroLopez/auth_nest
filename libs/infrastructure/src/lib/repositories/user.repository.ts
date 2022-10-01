@@ -13,35 +13,32 @@ export class DatabaseUserRepository implements UserRepository {
     private readonly userEntityRepository: Repository<User>,
     private readonly exceptionService: ExceptionsService
   ) {}
-  async updateRefreshToken(
-    username: string,
-    refreshToken: string
-  ): Promise<void> {
+  async updateRefreshToken(email: string, refreshToken: string): Promise<void> {
     await this.userEntityRepository.update(
       {
-        username: username,
+        email,
       },
       { hach_refresh_token: refreshToken }
     );
   }
-  async getUserByUsername(username: string): Promise<UserM | void> {
+  async getUserByUsername(email: string): Promise<UserM | void> {
     const adminUserEntity = await this.userEntityRepository.findOne({
       where: {
-        username: username,
+        email,
       },
     });
     if (!adminUserEntity) {
       return this.exceptionService.userNotFound({
-        message: `user ${username} not found`,
+        message: `user ${email} not found`,
       });
     } else {
       return this.toUser(adminUserEntity);
     }
   }
-  async updateLastLogin(username: string): Promise<void> {
+  async updateLastLogin(email: string): Promise<void> {
     await this.userEntityRepository.update(
       {
-        username: username,
+        email,
       },
       { last_login: () => 'CURRENT_TIMESTAMP' }
     );
@@ -51,7 +48,7 @@ export class DatabaseUserRepository implements UserRepository {
     const adminUser: UserM = new UserM();
 
     adminUser.id = adminUserEntity.id;
-    adminUser.username = adminUserEntity.username;
+    adminUser.email = adminUserEntity.email;
     adminUser.password = adminUserEntity.password;
     adminUser.createDate = adminUserEntity.createdate;
     adminUser.updatedDate = adminUserEntity.updateddate;
@@ -64,7 +61,7 @@ export class DatabaseUserRepository implements UserRepository {
   private toUserEntity(adminUser: UserM): User {
     const adminUserEntity: User = new User();
 
-    adminUserEntity.username = adminUser.username;
+    adminUserEntity.email = adminUser.email;
     adminUserEntity.password = adminUser.password;
     adminUserEntity.last_login = adminUser.lastLogin;
 

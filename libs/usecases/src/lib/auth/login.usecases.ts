@@ -49,7 +49,7 @@ export class LoginUseCases {
     }
     const match = await this.bcryptService.compare(pass, user.password);
     if (user && match) {
-      await this.updateLoginTime(user.username);
+      await this.updateLoginTime(user.email);
       const { password, ...result } = user;
       return result;
     }

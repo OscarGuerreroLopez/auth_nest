@@ -5,7 +5,10 @@ import {
   Index,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
+  OneToOne,
 } from 'typeorm';
+import { UserDetail } from './userDetail.entity';
 
 @Entity()
 export class User {
@@ -14,7 +17,7 @@ export class User {
 
   @Index({ unique: true })
   @Column('varchar', { unique: true })
-  username!: string;
+  email!: string;
 
   @Column('text')
   password!: string;
@@ -30,4 +33,8 @@ export class User {
 
   @Column('varchar', { nullable: true })
   hach_refresh_token!: string;
+
+  @OneToOne(() => UserDetail)
+  @JoinColumn()
+  userDetail!: UserDetail;
 }

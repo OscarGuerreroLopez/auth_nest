@@ -13,7 +13,11 @@
     "deploy:registration": "nx deploy registration",
     "deploy:login": "nx deploy login",
     "deploy": "nx affected --target=deploy",
-    "typeorm": "ts-node -P ./tsconfig.base.json $(yarn bin typeorm) -d ./libs/infrastructure/src/lib/config/typeorm/typeorm.config.ts"
+    "typeorm": "ts-node -P ./tsconfig.base.json $(yarn bin typeorm)",
+    "typeorm:run-migrations": "npm run typeorm migration:run -- -d ./libs/infrastructure/src/lib/config/typeorm/typeorm.config.ts",
+    "typeorm:generate-migration": "npm run typeorm -- -d ./libs/infrastructure/src/lib/config/typeorm/typeorm.config.ts migration:generate ./db/migrations/user",
+    "typeorm:create-migration": "npm run typeorm -- migration:create ./db/migrations/user",
+    "typeorm:revert-migration": "npm run typeorm -- -d ./libs/infrastructure/src/lib/config/typeorm/typeorm.config.ts migration:revert"
   },
   "private": true,
   "dependencies": {
