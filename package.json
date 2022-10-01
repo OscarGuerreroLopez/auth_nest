@@ -13,7 +13,7 @@
     "deploy:registration": "nx deploy registration",
     "deploy:login": "nx deploy login",
     "deploy": "nx affected --target=deploy",
-    "typeorm": "NODE_ENV=local ts-node -P ./tsconfig.base.json $(yarn bin typeorm) -d ./libs/infrastructure/src/lib/config/typeorm/typeorm.config.ts"
+    "typeorm": "ts-node -P ./tsconfig.base.json $(yarn bin typeorm) -d ./libs/infrastructure/src/lib/config/typeorm/typeorm.config.ts"
   },
   "private": true,
   "dependencies": {

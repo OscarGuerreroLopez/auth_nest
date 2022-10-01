@@ -18,6 +18,6 @@ const config = new DataSource({
   migrationsTableName: 'migration_user',
   migrations: ['database/migrations/**/*{.ts,.js}'],
 });
-console.log(config);
+// console.log(config);
 
 export default config;
