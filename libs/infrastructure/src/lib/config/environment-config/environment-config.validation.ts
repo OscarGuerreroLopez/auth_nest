@@ -30,9 +30,11 @@ class EnvironmentVariables {
   @IsString()
   DATABASE_PASSWORD!: string;
   @IsString()
+  DATABASE_ROOT_PASSWORD!: string;
+  @IsString()
   DATABASE_NAME!: string;
   @IsString()
-  DATABASE_SCHEMA!: string;
+  DATABASE_SYNCHRONIZE!: string;
 }
 
 export function validate(config: Record<string, unknown>) {

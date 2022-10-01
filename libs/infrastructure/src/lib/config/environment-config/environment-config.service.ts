@@ -29,7 +29,7 @@ export class EnvironmentConfigService implements DatabaseConfig, JWTConfig {
   }
 
   getDatabasePort(): number {
-    return this.configService.get<number>('DATABASE_PORT') || 0;
+    return this.configService.get<number>('DATABASE_PORT') || 3306;
   }
 
   getDatabaseUser(): string {
@@ -44,8 +44,8 @@ export class EnvironmentConfigService implements DatabaseConfig, JWTConfig {
     return this.configService.get<string>('DATABASE_NAME') || '';
   }
 
-  getDatabaseSchema(): string {
-    return this.configService.get<string>('DATABASE_SCHEMA') || '';
+  getDatabaseSync(): boolean {
+    return this.configService.get<boolean>('DATABASE_SYNCHRONIZE') || false;
   }
 
   getNodeEnv(): string {
