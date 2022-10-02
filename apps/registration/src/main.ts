@@ -5,6 +5,7 @@
 
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app/app.module';
 import {
@@ -12,11 +13,24 @@ import {
   AllExceptionFilter,
   LoggingInterceptor,
   ResponseInterceptor,
+  ResponseFormat,
 } from '@auth/infrastructure';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'registration';
+
+  const config = new DocumentBuilder()
+    .addBearerAuth()
+    .setTitle('Clean Architecture Nestjs')
+    .setDescription('Example with todo list')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config, {
+    extraModels: [ResponseFormat],
+    deepScanRoutes: true,
+  });
+  SwaggerModule.setup('api', app, document);
 
   // Filter
   app.useGlobalFilters(new AllExceptionFilter(new LoggerService()));

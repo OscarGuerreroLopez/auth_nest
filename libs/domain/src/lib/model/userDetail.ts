@@ -1,8 +1,9 @@
 export class UserDetail {
-  id!: number;
+  id?: number;
   email!: string;
   fname!: string;
   lname!: string;
+  isActive?: boolean;
   address1?: string;
   address2?: string;
   postalCode?: string;

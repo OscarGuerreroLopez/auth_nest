@@ -4,6 +4,8 @@ import {
   IsAuthenticatedUseCases,
   LoginUseCases,
   LogoutUseCases,
+  GetUserDetailUseCases,
+  InsertUserDetailUseCases,
 } from '@auth/usecases';
 
 import { ExceptionsModule } from '../exceptions/exceptions.module';
@@ -17,6 +19,7 @@ import { JwtTokenService } from '../services/jwt/jwt.service';
 import { RepositoriesModule } from '../repositories/repositories.module';
 
 import { DatabaseUserRepository } from '../repositories/user.repository';
+import { DatabaseUserDetailRepository } from '../repositories/userDetail.repository';
 
 import { EnvironmentConfigModule } from '../config/environment-config/environment-config.module';
 import { EnvironmentConfigService } from '../config/environment-config/environment-config.service';
@@ -37,6 +40,9 @@ export class UsecasesProxyModule {
   static LOGIN_USECASES_PROXY = 'LoginUseCasesProxy';
   static IS_AUTHENTICATED_USECASES_PROXY = 'IsAuthenticatedUseCasesProxy';
   static LOGOUT_USECASES_PROXY = 'LogoutUseCasesProxy';
+  static GET_USER_DETAIL_EMAIL_USECASES_PROXY =
+    'GetUserDetailEmailUseCasesProxy';
+  static INSERT_USER_DETAIL_USECASES_PROXY = 'InsertUserDetailUseCasesProxy';
 
   static register(): DynamicModule {
     return {
@@ -79,11 +85,30 @@ export class UsecasesProxyModule {
           provide: UsecasesProxyModule.LOGOUT_USECASES_PROXY,
           useFactory: () => new UseCaseProxy(new LogoutUseCases()),
         },
+        {
+          inject: [DatabaseUserDetailRepository],
+          provide: UsecasesProxyModule.GET_USER_DETAIL_EMAIL_USECASES_PROXY,
+          useFactory: (userDetailRepo: DatabaseUserDetailRepository) =>
+            new UseCaseProxy(new GetUserDetailUseCases(userDetailRepo)),
+        },
+        {
+          inject: [DatabaseUserDetailRepository, LoggerService],
+          provide: UsecasesProxyModule.INSERT_USER_DETAIL_USECASES_PROXY,
+          useFactory: (
+            userDetailRepo: DatabaseUserDetailRepository,
+            logger: LoggerService
+          ) =>
+            new UseCaseProxy(
+              new InsertUserDetailUseCases(logger, userDetailRepo)
+            ),
+        },
       ],
       exports: [
         UsecasesProxyModule.LOGIN_USECASES_PROXY,
         UsecasesProxyModule.IS_AUTHENTICATED_USECASES_PROXY,
         UsecasesProxyModule.LOGOUT_USECASES_PROXY,
+        UsecasesProxyModule.GET_USER_DETAIL_EMAIL_USECASES_PROXY,
+        UsecasesProxyModule.INSERT_USER_DETAIL_USECASES_PROXY,
       ],
     };
   }

@@ -21,7 +21,7 @@ export class DatabaseUserRepository implements UserRepository {
       { hach_refresh_token: refreshToken }
     );
   }
-  async getUserByUsername(email: string): Promise<UserM | void> {
+  async getUserByEmail(email: string): Promise<UserM | void> {
     const adminUserEntity = await this.userEntityRepository.findOne({
       where: {
         email,

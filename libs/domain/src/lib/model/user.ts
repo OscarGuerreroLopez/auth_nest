@@ -1,5 +1,5 @@
 export class UserWithoutPassword {
-  id!: number;
+  id?: number;
   email!: string;
   createDate!: Date;
   updatedDate!: Date;

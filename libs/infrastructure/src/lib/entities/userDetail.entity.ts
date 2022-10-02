@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
 @Entity()
 export class UserDetail {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id?: number;
 
   @Index({ unique: true })
   @Column('varchar', { unique: true })
@@ -14,6 +14,9 @@ export class UserDetail {
 
   @Column('text')
   lname!: string;
+
+  @Column('boolean', { default: false })
+  isActive?: boolean;
 
   @Column({ nullable: true })
   address1?: string;

@@ -16,34 +16,34 @@ export class LoginUseCases {
     private readonly bcryptService: IBcryptService
   ) {}
 
-  async getCookieWithJwtToken(username: string) {
+  async getCookieWithJwtToken(email: string) {
     this.logger.log(
       'LoginUseCases execute',
-      `The user ${username} have been logged.`
+      `The user ${email} have been logged.`
     );
-    const payload: IJwtServicePayload = { username: username };
+    const payload: IJwtServicePayload = { email: email };
     const secret = this.jwtConfig.getJwtSecret();
     const expiresIn = this.jwtConfig.getJwtExpirationTime() + 's';
     const token = this.jwtTokenService.createToken(payload, secret, expiresIn);
     return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.jwtConfig.getJwtExpirationTime()}`;
   }
 
-  async getCookieWithJwtRefreshToken(username: string) {
+  async getCookieWithJwtRefreshToken(email: string) {
     this.logger.log(
       'LoginUseCases execute',
-      `The user ${username} have been logged.`
+      `The user ${email} have been logged.`
     );
-    const payload: IJwtServicePayload = { username: username };
+    const payload: IJwtServicePayload = { email: email };
     const secret = this.jwtConfig.getJwtRefreshSecret();
     const expiresIn = this.jwtConfig.getJwtRefreshExpirationTime() + 's';
     const token = this.jwtTokenService.createToken(payload, secret, expiresIn);
-    await this.setCurrentRefreshToken(token, username);
+    await this.setCurrentRefreshToken(token, email);
     const cookie = `Refresh=${token}; HttpOnly; Path=/; Max-Age=${this.jwtConfig.getJwtRefreshExpirationTime()}`;
     return cookie;
   }
 
-  async validateUserForLocalStragtegy(username: string, pass: string) {
-    const user = await this.userRepository.getUserByUsername(username);
+  async validateUserForLocalStragtegy(email: string, pass: string) {
+    const user = await this.userRepository.getUserByEmail(email);
     if (!user) {
       return null;
     }
@@ -56,30 +56,30 @@ export class LoginUseCases {
     return null;
   }
 
-  async validateUserForJWTStragtegy(username: string) {
-    const user = await this.userRepository.getUserByUsername(username);
+  async validateUserForJWTStragtegy(email: string) {
+    const user = await this.userRepository.getUserByEmail(email);
     if (!user) {
       return null;
     }
     return user;
   }
 
-  async updateLoginTime(username: string) {
-    await this.userRepository.updateLastLogin(username);
+  async updateLoginTime(email: string) {
+    await this.userRepository.updateLastLogin(email);
   }
 
-  async setCurrentRefreshToken(refreshToken: string, username: string) {
+  async setCurrentRefreshToken(refreshToken: string, email: string) {
     const currentHashedRefreshToken = await this.bcryptService.hash(
       refreshToken
     );
     await this.userRepository.updateRefreshToken(
-      username,
+      email,
       currentHashedRefreshToken
     );
   }
 
-  async getUserIfRefreshTokenMatches(refreshToken: string, username: string) {
-    const user = await this.userRepository.getUserByUsername(username);
+  async getUserIfRefreshTokenMatches(refreshToken: string, email: string) {
+    const user = await this.userRepository.getUserByEmail(email);
     if (!user) {
       return null;
     }

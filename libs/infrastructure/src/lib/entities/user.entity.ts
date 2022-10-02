@@ -13,7 +13,7 @@ import { UserDetail } from './userDetail.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id?: number;
 
   @Index({ unique: true })
   @Column('varchar', { unique: true })

@@ -17,11 +17,13 @@ import {
   // BcryptService,
   // TypeOrmConfigModule,
   // User,
+  UsecasesProxyModule,
 } from '@auth/infrastructure';
 // import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    UsecasesProxyModule.register(),
     // TypeOrmConfigModule,
     // TypeOrmModule.forFeature([User]),
     EnvironmentConfigModule,

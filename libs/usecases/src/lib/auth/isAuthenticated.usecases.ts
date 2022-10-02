@@ -3,8 +3,8 @@ import { UserM, UserWithoutPassword, UserRepository } from '@auth/domain';
 export class IsAuthenticatedUseCases {
   constructor(private readonly adminUserRepo: UserRepository) {}
 
-  async execute(username: string): Promise<UserWithoutPassword | void> {
-    const result = await this.adminUserRepo.getUserByUsername(username);
+  async execute(email: string): Promise<UserWithoutPassword | void> {
+    const result = await this.adminUserRepo.getUserByEmail(email);
 
     if (result) {
       const user: UserM = result;
