@@ -25,6 +25,7 @@ async function bootstrap() {
     .setTitle('Clean Architecture Nestjs')
     .setDescription('Example with todo list')
     .setVersion('1.0')
+    .addServer('/registration')
     .build();
   const document = SwaggerModule.createDocument(app, config, {
     extraModels: [ResponseFormat],

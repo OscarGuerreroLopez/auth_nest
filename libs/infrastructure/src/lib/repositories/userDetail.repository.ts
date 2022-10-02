@@ -33,13 +33,9 @@ export class DatabaseUserDetailRepository implements UserDetailRepository {
   async insertUser(user: UserDetail): Promise<UserDetail> {
     const userDetailEntity = this.toUserEntity(user);
 
-    const result = await this.userDetailEntityRepository.insert(
-      userDetailEntity
-    );
+    const result = await this.userDetailEntityRepository.save(userDetailEntity);
 
-    const resultUser = this.toUser(result.generatedMaps[0] as UserDetailEntity);
-    console.log('@@@222', result);
-    console.log('@@@333', resultUser);
+    const resultUser = this.toUser(result);
 
     return resultUser;
   }
